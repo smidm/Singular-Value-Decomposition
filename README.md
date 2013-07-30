@@ -21,7 +21,7 @@ Original sources available at http://pages.cs.wisc.edu/~sifakis/project_pages/sv
 
 # Compilation
 
-CMake creates library target "svd" and a set of benchmarks executables.
+CMake creates library target "svd" and a optionally set of benchmarks executables.
 
     $ cd <downloaded / cloned source directory>
     $ mkdir _build
@@ -36,6 +36,10 @@ By default SSE implementation is used. To select AVX or scalar implementation us
    or 
    
     $ cmake -D IMPLEMENTATION=SCALAR ..
+    
+To build benchmarks use:
+
+    $ cmake -D BUILD_BENCHMARKS=TRUE ..
        
 Tested on Ubuntu 12.10 only.
 

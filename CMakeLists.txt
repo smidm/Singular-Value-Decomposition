@@ -41,15 +41,19 @@ ENDIF()
 
 ADD_LIBRARY(svd STATIC ${SVD_SRCS})
 
-ADD_EXECUTABLE(Singular_Value_Decomposition_Streaming_Test Singular_Value_Decomposition_Streaming_Test.cpp)
-TARGET_LINK_LIBRARIES(Singular_Value_Decomposition_Streaming_Test svd)
+SET(BUILD_BENCHMARKS "False" CACHE BOOL "Build benchmark executables.")
 
-IF((${IMPLEMENTATION} STREQUAL "SSE") OR (${IMPLEMENTATION} STREQUAL "AVX"))
-    ADD_DEFINITIONS(-DPERFORM_CORRECTNESS_TEST)
-    ADD_EXECUTABLE(Singular_Value_Decomposition_Correctness_Test Singular_Value_Decomposition_Streaming_Test.cpp)
-    TARGET_LINK_LIBRARIES(Singular_Value_Decomposition_Correctness_Test svd)    
-    ADD_EXECUTABLE(Singular_Value_Decomposition_Unit_Test Singular_Value_Decomposition_Unit_Test.cpp)
-    TARGET_LINK_LIBRARIES(Singular_Value_Decomposition_Unit_Test svd)
+IF(BUILD_BENCHMARKS)
+    ADD_EXECUTABLE(Singular_Value_Decomposition_Streaming_Test Singular_Value_Decomposition_Streaming_Test.cpp)
+    TARGET_LINK_LIBRARIES(Singular_Value_Decomposition_Streaming_Test svd)
+
+    IF((${IMPLEMENTATION} STREQUAL "SSE") OR (${IMPLEMENTATION} STREQUAL "AVX"))
+        ADD_DEFINITIONS(-DPERFORM_CORRECTNESS_TEST)
+        ADD_EXECUTABLE(Singular_Value_Decomposition_Correctness_Test Singular_Value_Decomposition_Streaming_Test.cpp)
+        TARGET_LINK_LIBRARIES(Singular_Value_Decomposition_Correctness_Test svd)    
+        ADD_EXECUTABLE(Singular_Value_Decomposition_Unit_Test Singular_Value_Decomposition_Unit_Test.cpp)
+        TARGET_LINK_LIBRARIES(Singular_Value_Decomposition_Unit_Test svd)
+    ENDIF()
 ENDIF()
 
 FIND_PACKAGE(Threads)
