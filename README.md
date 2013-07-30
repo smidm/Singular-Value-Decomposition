@@ -21,13 +21,23 @@ Original sources available at http://pages.cs.wisc.edu/~sifakis/project_pages/sv
 
 # Compilation
 
+CMake creates library target "svd" and a set of benchmarks executables.
+
     $ cd <downloaded / cloned source directory>
     $ mkdir _build
     $ cd _build
     $ cmake ..
     $ make
     
-Provided CMake support works only for SSE implementations. Tested on Ubuntu 12.10 only.
+By default SSE implementation is used. To select AVX or scalar implementation use:
+
+    $ cmake -D IMPLEMENTATION=AVX ..
+    
+   or 
+   
+    $ cmake -D IMPLEMENTATION=SCALAR ..
+       
+Tested on Ubuntu 12.10 only.
 
 # Original README
 
@@ -35,7 +45,7 @@ A Makefile is provided. Due to the use of the AVX instruction set on some of
 the included benchmarks, the Intel C++ Composer (icc) version 12.X is used as
 the default and tested compiler. It is possible to use the g++ compiler instead
 for those versions of the benchmarks that are limited to Scalar or SSE-only
-implementationns.
+implementations.
 
 The executables built by this Makefile include:
 
