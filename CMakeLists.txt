@@ -4,6 +4,7 @@ PROJECT(SVD)
 SET(SVD_SRCS
     POINTER_QUEUE.h
     PTHREAD_QUEUE.cpp
+    PTHREAD_QUEUE.h
     Singular_Value_Decomposition_Givens_QR_Factorization_Kernel.hpp
     Singular_Value_Decomposition_Helper.cpp
     Singular_Value_Decomposition_Helper.h
